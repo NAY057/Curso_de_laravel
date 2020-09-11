@@ -69,6 +69,9 @@ _________________________________________
 
 _____________MIGRAR DBS__________________
 php artisan migrate = MIGRA LAS DBS DE LARAVEL A EL MOTOR DE DBS 
-php artisan migreted:rollback REGRESA UN PASO A TRAS EN LA MIGRACION
+php artisan migrete:rollback REGRESA UN PASO A TRAS EN LA MIGRACION
+php artisan migrate:rollback --step 3 = Para controlar la cantidad de migraciones que se revierten en un rollback
 php artisan = PARA VAR MAS COMANDOS DE ARTISAN
+php artisan 'comando' + '--help' = PARA OBTENER AYUDA DEL COMANDO EN CUESTION
+php artisan make:migration 'nombre descriptivo de la migracion' + '--create' + ='nombre de la tabla a crear' = CREA UN NUEVO ARCHIVO DE MIGRACION (despues de debe migrar a la db para que aparesca alla)
 _________________________________________
