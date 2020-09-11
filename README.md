@@ -102,12 +102,12 @@ El comando tinker nos ofrece un entorno de pruebas para ver cómo funcionan las 
 __________________________________________
 
 
-##tinker
+## tinker
 tinker nos obrece un area de pruebas en memoria para poder probar un poco el codigo
 - php artisan tinker
 
 asi se consulta sobre algun modelo
-- App\models\'nombre del modelo'::all()
+- App\models\'nombre del modelo'::all();
 
 asi se le agrega info al modelo
 - $'nombre de lo que se quiere agregar': = new App\models\'nombre del modelo'();
