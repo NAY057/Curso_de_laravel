@@ -61,3 +61,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # Curso_de_laravel
 Archivos creados en el curso de laravel con platzi
+
+# Comandos
+________CRAR SERVER LOCAL________________
+php artisan serve = CREA UN SERVER LOCAL
+_________________________________________
+
+_____________MIGRAR DBS__________________
+php artisan migrate = MIGRA LAS DBS DE LARAVEL A EL MOTOR DE DBS 
+php artisan migreted:rollback REGRESA UN PASO A TRAS EN LA MIGRACION
+php artisan = PARA VAR MAS COMANDOS DE ARTISAN
+_________________________________________
