@@ -63,15 +63,56 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 Archivos creados en el curso de laravel con platzi
 
 # Comandos
-________CRAR SERVER LOCAL________________
-php artisan serve = CREA UN SERVER LOCAL
+
+## CRAR SERVER LOCAL
+- php artisan serve = CREA UN SERVER LOCAL
 _________________________________________
 
-_____________MIGRAR DBS__________________
-php artisan migrate = MIGRA LAS DBS DE LARAVEL A EL MOTOR DE DBS 
-php artisan migrete:rollback REGRESA UN PASO A TRAS EN LA MIGRACION
-php artisan migrate:rollback --step 3 = Para controlar la cantidad de migraciones que se revierten en un rollback
-php artisan = PARA VAR MAS COMANDOS DE ARTISAN
-php artisan 'comando' + '--help' = PARA OBTENER AYUDA DEL COMANDO EN CUESTION
-php artisan make:migration 'nombre descriptivo de la migracion' + '--create' + ='nombre de la tabla a crear' = CREA UN NUEVO ARCHIVO DE MIGRACION (despues de debe migrar a la db para que aparesca alla)
+## MIGRAR DBs
+MIGRA LAS DBS DE LARAVEL A EL MOTOR DE DBS 
+- php artisan migrate  
+
+REGRESA UN PASO A TRAS EN LA MIGRACION
+- php artisan migrete:rollback 
+
+Para controlar la cantidad de migraciones que se revierten en un rollback
+- php artisan migrate:rollback --step 3 
+
+PARA VAR MAS COMANDOS DE ARTISAN
+- php artisan 
+
+PARA OBTENER AYUDA DEL COMANDO EN CUESTION
+- php artisan 'comando' + '--help' 
+
+CREA UN NUEVO ARCHIVO DE MIGRACION (despues de debe migrar a la db para que aparesca alla)
+- php artisan make:migration 'nombre descriptivo de la migracion' + '--create' + ='nombre de la tabla a crear' 
 _________________________________________
+
+## CREAR MODELOS
+Un ORM es un sistema que nos permite mapear registros de la base de datos a objetos dentro dentro de nuestro código. No es exclusivo de PHP ya que se usa mucho en los lenguajes de programación orientada a objetos.
+
+Cuando creamos las bases de datos es estándar que las tablas tengan el nombre en plural pero los modelos como representan una clase que representa un objeto, tendrán su nombre en singular.
+
+Todos los modelos los podremos encontrar dentro de la carpeta app. Laravel no tiene carpeta models porque los creadores creen que model puede tener muchos significados.
+
+El comando tinker nos ofrece un entorno de pruebas para ver cómo funcionan las cosas que estamos haciendo. Tiene en cuenta variables de entorno, lo que inicializa Laravel y también sabe que estamos usando Eloquent.
+
+- php artisan make:model = crea una nueva clase para representar un modelo de Eloquent.
+
+__________________________________________
+
+
+##tinker
+tinker nos obrece un area de pruebas en memoria para poder probar un poco el codigo
+- php artisan tinker
+
+asi se consulta sobre algun modelo
+- App\models\'nombre del modelo'::all()
+
+asi se le agrega info al modelo
+- $'nombre de lo que se quiere agregar': = new App\models\'nombre del modelo'();
+
+paraguardar lo creado
+- $'nombre de lo que se creó'->save();
+
+_____________________________________________
