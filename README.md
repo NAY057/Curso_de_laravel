@@ -38,6 +38,7 @@ Archivos creados en el curso de laravel con platzi
 - this will be highlighted in red
 - test
 ```
+- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c1dd5`
 
 ## CRAR SERVER LOCAL
 - php artisan serve = CREA UN SERVER LOCAL
