@@ -132,3 +132,12 @@ Luego se debe de poner lo siguente en 'function down()' para especificar que se 
 
 Para crear la columna title después de la columna ‘id’ y que esté mejor estruturado:
 - $table->text(‘title’)->after(‘id’);
+
+_________________________________________
+
+## BLADE LAYOUT
+Cuando se tienen muchas vistas que repiten gran parte del código HTML, una mejor práctica para evitar esta repetición es crear layouts y extender de ellos. De esta manera el layout tendrá el contenido que siempre se repite y los hijos el código específico de ellos.
+
+@yield marca la parte (PADRE) en donde irá el código que los hijos extenderan  o hereden del layout.
+
+En las vistas (HIJAS) se utiliza @section para decir que esa parte del código es la que concuerda con el @yield del layout.
