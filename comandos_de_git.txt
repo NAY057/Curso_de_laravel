@@ -1,0 +1,385 @@
+comandos de git aprendidos en esta clase:
+
+    git init: lo usamos para determinar la carpeta en la que vamos a trabajar.
+
+    git status: lo usamos para saber si tenemos un archivo añadido o borrado en nuestro proyecto, para saber en la rama en la que estamos y si tenemos commits.
+
+    git add: es para añadir un archivo a nuestra rama seguidamente ponemos entre comillas el nombre de nuestro archivo o poner un punto para añadir todos los archios de nuestra carpeta.
+
+    git rm: lo usamos para borrar un archivo que hayamos añadido, para eliminarlo por completo de nuestra rama usamosgit rm --cached.
+
+    git commit: se usa para añadir un commit a nuestra rama, también podemos ponerle un -m seguidamente ponemos entre comillas nuestro ensaje.
+
+    git config: muestra configuraciones de git también podemos usar –list para mostrar la configuración por defecto de nuestro git y si añadimos --show-origin inhales nos muestra las configuraciones guardadas y su ubicación.
+
+    git config --global user.name: cambia de manera global el nombre del usuario, seguidamente ponemos entre comillas nuestro nombre.
+
+    git config --global user.email: cambia de manera global el email del usuario, seguidamente ponemos entre comillas nuestro nombre.
+
+    git log: se usa para ver la historia de nuestros archivos, los commits, el usuario que lo cambió, cuando se realizaron los cambios etc. seguidamente ponemos el nombre de nuestro archivo.
+
+
+$ git init //inicializar el repositorio
+$ git add nombre_de_archivo.extencion //Agregar el archivo al repositorio
+$ git commit -m “Mensaje”// Agregamos los cambios para el repositorio
+$ git add .// Agregar los cambios de la carpeta en la que nos encontramos agregar todo
+$ git status // visualizar cambios
+$ git log nombre_de_archivos.extencion //historico de cambios con detalles
+$ git push //envia a otro repositorio remoto lo que estamos haciendo
+$ git pull //traer repositorio remoto
+$ ls //listado de carpetas en donde me encuentro es decir dir en windows
+$ pwd //ubicacion actual
+$ mkdir //make directori nueva carpeta
+$ touch archivo.extencion//crear archivo vacio
+$ cat archivo.extencion//muestra el contenido del archivo
+$ history //historial de comandos utilizados durante esa sesion
+$ rm archivo.extencion //eliminacion de archivo
+$ comando --help //ayuda sobre el comando
+$ checkout //traer cambios realizado
+$ git rm --cached archivo.extencion//se usa para devolver el archivo que se tiene en ram cuando escribimos git add lo devuleve a estado natural mientra esta en staging
+$ git config --list //muestra la lista de configuracion de git
+$ git config --list --show-origin//rutas de acceso a la configuración de git
+$ git log archivo.extencion //muestra la historia del archivo
+
+$ git commit -am “Mensaje” // hace git add .  y git commit “Mensaje” al mismo tiempo, pero solo se debe hacer con los archivos agregados previamente
+
+$ git checkout 'nombre de la rama' // MUCHO CUIDADOO ANTES DE CAMBIAR DE RAMA SE DEBE DE HACER UN COMMIT DE LO CONTRARIO SE PERDERA TODO LO QUE SE HAYA REALIZADO
+
+$ git reset -------------- borrar commits
+$ git branch -d --------- borrar ramas
+$ git rm ------------------ borrar archivos
+
+
+************Traer un repositorio externo************
+$git remote add origin (url)
+$git remote (muestra el origen)
+$git remote -v(es verval)
+
+$git pull origin master --allow-unrelated-histories (Fuerza la union de las diferentes historias)
+
+$git pull origin master (Descarga cambios)
+
+$git push (origin) (master) (Sube Cambios)
+
+$git config -l // es una forma rapida de ver la lista de configuracion de git
+
+COMANDOS A SEGUIR PARA AGREGAR ARCHIVOS AL GIT REMOTO
+$git init
+$git add .
+$git commit -m 'adding files before remote'
+$git remote add origin 'aqui va la direccion del repositorio'
+$git remote -v
+$git pull origin master --allow-unrelated-histories
+$git push origin master
+
+
+__________ASI SE CREAN LLAVES SSH____________________________
+Generar una nueva llave SSH: (Cualquier sistema operativo)
+
+ssh-keygen -t rsa -b 4096 -C "youremail@example.com"
+
+Comprobar proceso y agregarlo (Windows)
+
+    eval $(ssh-agent -s)
+    ssh-add ~/.ssh/id_rsa
+______________________________________________
+
+
+___________COMANDOS PARA CAMBIAR LA RUTA ORIGIN___________________________________
+
+SE DEBE DE ESTAR UBICADO EN LA CARPETA DEL REPO QUE QUEREMOS ENLAZAR
+
+Primero se verifica el la ruta de origin con:
+$git remote -v
+
+Se configura la nueva ruta de origin con la clave SSH:
+$git remote set-url origin git@github.com:NAY057/Curso_De_Git_y_Github_Comandos.git
+
+Se compruevan los cambios nuevamente con:
+$git remote -v
+
+Se hace un pull para traer la ultima version que hay en el servidor
+$git pull origin master
+
+Se hace un commit con los ultimos cambios antes de hacer el push
+$git commit -am '“Mensaje”
+
+Luego se puede hacer un pull para actualizar nuevamente a la ultima version del servidor
+$git pull origin master
+
+Por ultimo se hace el push para enviar todo por ssh
+$git push origin master
+
+Y eso seria todo
+______________________________________________
+
+
+
+________________CREAR TAGS______________________________
+
+Crear un nuevo tag y asignarlo a un commit: 
+$git tag -a nombre-del-tag id-del-commit.
+
+Borrar un tag en el repositorio local: 
+$git tag -d nombre-del-tag.
+
+Listar los tags de nuestro repositorio local: 
+$git tag o git show-ref --tags.
+
+Publicar un tag en el repositorio remoto: 
+$git push origin --tags.
+
+Borrar un tag del repositorio remoto: 
+$git tag -d nombre-del-tag y git push origin :refs/tags/nombre-del-tag.
+______________________________________________
+
+
+_________________CREAR RAMAS EN EL ORIGIN_____________________________
+
+
+Crear una rama en el repositorio local: 
+$git branch nombre-de-la-rama  
+$git checkout -b nombre-de-la-rama(para borrar)
+
+
+Publicar una rama local al repositorio remoto: 
+$git push origin nombre-de-la-rama.
+______________________________________________
+
+
+
+
+_______________CONFIGURACION DEL ARBOLITO_______________________________
+
+alias arbolito='git log --all --graph --decorate --oneline'
+______________________________________________
+
+
+
+
+__________________COMANDOS PARA TRAER OTRO REPO DISTINTO AL ORIGIN____________________________
+
+Para traer cambios del repositorio original:
+.
+
+Crear una nueva fuente para traer esos cambios:
+
+$git remote -v
+$git remote add upstream [original_repository_url]
+$git remote -v
+$git pull upstream master
+
+Actualizar nuestro repositorio en Github
+
+$git push origin master
+
+______________________________________________
+
+
+
+
+_________________COMO IGNORAR ARCHIVOS CON EL .GITIGNORE_____________________________
+
+SE DEBE DE CREAR UN ARCHIVO CON EL NOMBRE '.gitignore' EN DONDE SE ESCRIBE UN LISTADO 
+DE LOS ARCHIVOS A IGNORAR, EJEMPLO:
+
+el esterisco hace referencia a todos los archivos con la extencion .jpg
+    '*.jpg'
+
+______________________________________________
+
+
+___________________TODO SOBRO EL README___________________________
+
+ESTE ES UN EDITOR MUY BUENO PARA MODIFICAR LOS README
+https://pandao.github.io/editor.md/en.html
+
+README.md es una excelente práctica en tus proyectos, md significa Markdown, 
+que es una especie de código que te permite cambiar la manera en que se ve un archivo de texto.
+
+Lo interesante de Markdown es que funciona en muchas páginas, 
+por ejemplo la edición en Wikipedia; es un lenguaje intermedio que no es HTML, 
+no es texto plano, es una manera de crear excelentes texto formateados.
+______________________________________________
+
+
+
+___________________HOSTING DE GITHUB PAGES___________________________
+
+Se debe de crear un repo con el mismo nombre de usuario de esta manera
+'NAY057.github.io' para que asi se vea el dominio, IMPORTANTE PONER EL NOMBRE COMO 'index.html'
+______________________________________________ 
+
+
+___________________COMANDO REBASE___________________________
+
+El comando rebase es una mala práctica, nunca se debe usar,
+si se va a usar solo de debe hacer de manera local y nunca en un repo remoto
+la manera correcta de hacer es asi:
+
+SOLO DE DEBE HACER SI SE TIENEN LAS COSAS CLARAS YA QUE rebase reescribe la historia del repositorio, 
+cambia la historia de donde comenzó la rama y solo debe ser usado de manera local.
+
+PRIMERO SE HACE 'git rebase NOMBRE DE LA RAMA' a la rama donde se hicieron los cambios
+
+Y LUEGO SE HACE 'git rebase NOMBRE DE LA RAMA' a la RAMA MASTER O RAMA A LA QUE QUEREMOS APLICAR
+TODOS LOS CAMBIOS DE MANERA DEFINITIVA
+______________________________________________
+
+
+
+___________________COMANDO MERGE___________________________
+Para uso del merge lo mejor es estar en la rama master o en la que se quiere dejar el <Head>
+
+$git merge (branchName)
+
+______________________________________________
+
+
+
+____________________COMANDO STASH__________________________
+
+El comando git stash guarda el trabajo actual del Staging en una lista diseñada para ser temporal llamada Stash, para que pueda ser recuperado en el futuro.
+Para agregar los cambios al stash se utiliza el comando:
+git stash.
+
+$git stash
+
+Podemos poner un mensaje en el stash, para asi diferenciarlos en git stash list por si tenemos varios elementos en el stash. Ésto con:
+
+$git stash save "mensaje identificador del elemento del stashed"
+
+
+Para recuperar los últimos cambios desde el stash a tu staging area utiliza el comando:
+
+$git stash pop
+
+Para ver la lista de cambios guardados en Stash y así poder recuperarlos o hacer algo con ellos podemos utilizar el comando:
+
+$git stash list
+
+Para crear una rama y aplicar el stash mas reciente podemos utilizar el comando
+
+$git stash branch <nombre_de_la_rama>
+
+Si deseas crear una rama y aplicar un stash específico (obtenido desde git stash list) puedes utilizar el comando:
+
+Al utilizar estos comandos crearás una rama con el nombre <nombre_de_la_rama>, te pasarás a ella y tendrás el stash especificado en tu staging area.
+
+$git stash branch nombre_de_rama stash@{<num_stash>}
+
+Para eliminar los cambios más recientes dentro del stash (el elemento 0), podemos utilizar el comando:
+
+$git stash drop
+
+Pero si en cambio conoces el índice del stash que quieres borrar (mediante git stash list) puedes utilizar el comando:
+
+$git stash drop stash@{<num_stash>}
+
+Donde el <num_stash> es el índice del cambio guardado.
+
+Si en cambio deseas eliminar todos los elementos del stash, puedes utilizar:
+
+$git stash clear
+
+
+guardará en el stash los archivos que no estén en el staging.
+$git stash -u 
+
+______________________________________________
+
+
+
+___________________GIT CLEAN___________________________
+
+Para saber qué archivos vamos a borrar tecleamos (simula la iliminacion de los archivos)
+$git clean --dry-run
+
+cuado se este seguro de los que va a borrar se usa el siguiente comando
+
+Para borrar todos los archivos listados (que no son carpetas) tecleamos 
+$git clean -f
+
+______________________________________________
+
+
+__________________COMANDO CHERRY-PICK____________________________
+
+Existe un mundo alternativo en el cual vamos avanzando en una rama pero necesitamos en master uno de esos avances de la rama, para eso utilizamos el comando 
+Trae un commit de otra rama a la rama master.
+$git cherry-pick IDCommit.
+
+cherry-pick es una mala práctica porque significa que estamos reconstruyendo la historia, usa cherry-pick con sabiduría. Si no sabes lo que estás haciendo ten mucho cuidado.
+
+______________________________________________
+
+
+_________________COMNADO GIT AMEND_____________________________
+
+Utilizamos git commit --amend, amend en inglés es remendar y lo que hará es que los cambios que hicimos nos los agregará al commit anterior.
+
+$git commit --amend
+
+pero primero se deben de agregar los archivos que se quieran agregar al commit anterior asi:
+
+$git add (la ruta del archivo)
+
+Luego si se usa el comando
+
+$git commit --amend
+
+este unira los cambios con el ultimo commit
+
+______________________________________________
+
+
+_______________COMANDO DE EMERGENCIA_______________________________
+
+¿Qué pasa cuando todo se rompe y no sabemos qué está pasando? 
+Con git reset HashDelHEAD nos devolveremos al estado en que el proyecto funcionaba.
+
+$git reset --soft HashDelHEAD te mantiene lo que tengas en staging ahí.
+$git reset --hard HashDelHEAD (ESTE ES EL EFECTIVO) resetea absolutamente todo incluyendo lo que tengas en staging.
+
+git reset es una mala práctica, no deberías usarlo en ningún momento; debe ser nuestro último recurso.
+
+con git reflog se puede ver el log de una manera completa(se ven todos los cambios hechos sin excepcion)
+$git reflog
+
+______________________________________________
+
+
+
+_________________COMNADOS PARA BUSCAR ARCHIVOS EN COMMITS_____________________________
+
+git grep color -->use la palabra color
+git grep la --> donde use la palabra la
+git grep -n color–> en que lineas use la palabra color
+git grep -n platzi --> en que lineas use la palabra platzi
+git grep -c la --> cuantas veces use la palabra la
+git grep -c paltzi --> cuantas veces use la palabra platzi
+git grep -c “<p>”–> cuantas veces use la etiqueta <p>
+
+git log-S “cabecera” --> cuantas veces use la palabra cabecera en
+todos los commits.
+
+grep–> para los archivos
+log --> para los commits.
+
+______________________________________________
+
+
+_______________COMANDOS DE RECURSOS COLABORATIVOS_______________________________
+
+
+$git shortlog -sn = muestra cuantos commit han hecho cada miembros del equipo.
+$git shortlog -sn --all = muestra cuantos commit han hecho cada miembros del equipo hasta los que han sido eliminado
+$git shortlog -sn --all --no-merges = muestra cuantos commit han hecho cada miembros quitando los eliminados sin los merges
+$git blame ARCHIVO = muestra quien hizo cada cosa linea por linea
+$git COMANDO --help = muestra como funciona el comando.
+$git blame ARCHIVO -L linea_inicial,linea_final -c = muestra quien hizo cada cosa linea por linea indicándole desde que linea ver ejemplo -L35,50
+$git branch -r = se muestran todas las ramas remotas
+$git branch -a = se muestran todas las ramas tanto locales como remotas
+
+______________________________________________
+

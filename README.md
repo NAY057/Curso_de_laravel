@@ -34,13 +34,14 @@ Archivos creados en el curso de laravel con platzi
 # Comandos
 
 ```diff
-+ this will be highlighted in green
-- this will be highlighted in red
-- test
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
 ```
-- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c1dd5`
 
-## CRAR SERVER LOCAL
+## CREAR SERVER LOCAL
 - php artisan serve = CREA UN SERVER LOCAL
 _________________________________________
 
@@ -61,21 +62,36 @@ PARA OBTENER AYUDA DEL COMANDO EN CUESTION
 - php artisan 'comando' + '--help' 
 
 CREA UN NUEVO ARCHIVO DE MIGRACION (despues de debe migrar a la db para que aparesca alla)
-- php artisan make:migration 'nombre descriptivo de la migracion' + '--create' + ='nombre de la tabla a crear' 
+- php artisan make:migration 'nombre descriptivo de la migracion' + '--create' + 'nombre de la tabla a crear' 
 _________________________________________
+
+## CREAR CONTROLADORES
+Basados en el modelo MVC, vimos que las vistas las tenemos en resources/views, igualmente en la carpeta app/Http/Controllers podremos definir nuestros controladores.
+Aunque podemos utilizar closures directamente dentro de las rutas, Laravel viene preparado para que trabajemos con controladores.
+
+Cuando utilizamos el comando “artisan”, encontramos una sección llamada “make” que nos va a permitir crear diferentes cosas en el proyecto. make:controller nos crea un nuevo controlador.
+
+En nuestro archivo web.php, en la parte de los parámetros, en vez de poner un closure vamos a poner el nombre del controlador que creamos seguido de una @ y finalizando el método que llamaremos de ese controlador.
+
+-php artisan make:controller 'nombre del controlador'
+
+En la parte de rutas se debe especificar la ruta el controlados de la siguiente manera, amenos que el controlador no sea de tipo 'resource'
+- Route::get('/(ruta de navegacion)', 'App\Http\Controllers\(nombre del controlador)@(metodo)'); (SI NO ES DE TIPO RESOURCE)
+Ej: Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
+
+- Route::resource('/(ruta de navegacion)', 'App\Http\Controllers\(nombre del controlador)');
+(SI ES DE TIPO RESOURCE)
+Ej: Route::resource('/expense_reports', 'App\Http\Controllers\ExpenseReportController');
+ 
+__________________________________________
 
 ## CREAR MODELOS
 Un ORM es un sistema que nos permite mapear registros de la base de datos a objetos dentro dentro de nuestro código. No es exclusivo de PHP ya que se usa mucho en los lenguajes de programación orientada a objetos.
 
 ```diff
 - No es aconsejable modificar una migración ya que si estamos trabajando en equipo alguien puede haber ya corrido la migración con anterioridad y esto le causaría conflictos. Lo aconsejable es crear una migración adicional.
-El comando migrate:fresh lo reinicia todo incluyendo la base de datos y los elementos creados
+- El comando migrate:fresh lo reinicia todo incluyendo la base de datos y los elementos creados
 ```
-
-<tspan fill="red">
-No es aconsejable modificar una migración ya que si estamos trabajando en equipo alguien puede haber ya corrido la migración con anterioridad y esto le causaría conflictos. Lo aconsejable es crear una migración adicional.
-El comando migrate:fresh lo reinicia todo incluyendo la base de datos y los elementos creados.
-</tspan>
 
 Cuando creamos las bases de datos es estándar que las tablas tengan el nombre en plural pero los modelos como representan una clase que representa un objeto, tendrán su nombre en singular.
 
@@ -83,7 +99,7 @@ Todos los modelos los podremos encontrar dentro de la carpeta app. Laravel no ti
 
 El comando tinker nos ofrece un entorno de pruebas para ver cómo funcionan las cosas que estamos haciendo. Tiene en cuenta variables de entorno, lo que inicializa Laravel y también sabe que estamos usando Eloquent.
 
-- php artisan make:model = crea una nueva clase para representar un modelo de Eloquent.
+- php artisan make:model + nombre del modelo (en singular) = crea una nueva clase para representar un modelo de Eloquent.
 
 __________________________________________
 
@@ -102,3 +118,17 @@ paraguardar lo creado
 - $'nombre de lo que se creó'->save();
 
 _____________________________________________
+
+
+## CREAR NUEVAS COLUMNAS
+Primero se realiza una nueva migracion para no generar confligtos, ademas se usa la siguiente expresion '--table' para MIGRAR SOLO LA TABLA EN CUESTION
+- php artisan make:migration 'nombre descriptivo de la migracion' --table 'nombre de la tabla'
+
+Despues de crear la migracion se accede a ella y se crean las tablas en 'function up()' 
+ - $table->tipo de dato('nombre de la tabla');
+
+Luego se debe de poner lo siguente en 'function down()' para especificar que se debe hacer en caso de un rollback
+ - $table->dropColumn('title');
+
+Para crear la columna title después de la columna ‘id’ y que esté mejor estruturado:
+- $table->text(‘title’)->after(‘id’);
