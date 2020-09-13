@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 // Route::get('/dashboard',function(){
 //     return view('test', [
-//         //arreglo asociativo
+//         //arregl o asociativo
 //         'title' => 'Curso laravel en platzi!!!!'
 //     ]);
 // });
@@ -26,3 +26,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\HomeController@index');
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
+
+Route::resource('/expense_reports', 'App\Http\Controllers\ExpenseReportController');
+
