@@ -36,6 +36,7 @@ Archivos creados en el curso de laravel con platzi
 ```diff
 + this will be highlighted in green
 - this will be highlighted in red
+- test
 ```
 
 ## CRAR SERVER LOCAL
@@ -67,15 +68,13 @@ Un ORM es un sistema que nos permite mapear registros de la base de datos a obje
 
 ```diff
 - No es aconsejable modificar una migración ya que si estamos trabajando en equipo alguien puede haber ya corrido la migración con anterioridad y esto le causaría conflictos. Lo aconsejable es crear una migración adicional.
-- El comando migrate:fresh lo reinicia todo incluyendo la base de datos y los elementos creados
+El comando migrate:fresh lo reinicia todo incluyendo la base de datos y los elementos creados
 ```
 
 <tspan fill="red">
 No es aconsejable modificar una migración ya que si estamos trabajando en equipo alguien puede haber ya corrido la migración con anterioridad y esto le causaría conflictos. Lo aconsejable es crear una migración adicional.
 El comando migrate:fresh lo reinicia todo incluyendo la base de datos y los elementos creados.
 </tspan>
-
-- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c15ddd`
 
 Cuando creamos las bases de datos es estándar que las tablas tengan el nombre en plural pero los modelos como representan una clase que representa un objeto, tendrán su nombre en singular.
 
