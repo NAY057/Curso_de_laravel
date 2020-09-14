@@ -149,7 +149,7 @@ Se utiliza la funcion store para guardar la informacion dentro de la base de dat
     +public function store(Request $request)
     +{
         $report = new NOMBRE DEL MODELO();
-        $report->NOMBRE DEL ATRIBUTO = $request->get('NOMBRE DEL ATRIBUTO ASIGNADO EN EL HTML');
+        $report->NOMBRE DEL ATRIBUTO = $request->get('nombre del input en el html');
         $report->save();
 
         return redirect('/expense_reports');
@@ -165,7 +165,7 @@ CSRF (Cross-site request forgery) es un tipo de ataque que consiste en que un us
 
 Si queremos que un form pueda pasar la seguridad CSRF de Laravel, debemos agregar el helper @csrf el cual nos agrega un token.
 
-    Cuando estamos guardando nuevas entradas en la base de datos podemos redireccionar adonde queramos en nuestra aplicación con una respuesta especial de Laravel llamada redirect.
+Cuando estamos guardando nuevas entradas en la base de datos podemos redireccionar adonde queramos en nuestra aplicación con una respuesta especial de Laravel llamada redirect.
 
 Estamos trabajando con Middlewares los cuales son muy usados en aplicaciones web que consisten en capas que contienen el request. Cuando llega un request, éste deberá pasar por diferentes capas o filtros (middlewares) quienes al final regresarán una respuesta. Cada uno de los filtros puede detener las peticiones en caso de que algo no cumpla.
 
@@ -177,3 +177,44 @@ _____________________________________________
 ## REDIRECT
 hace un retorno a la vista que se requiera
 - return redirect('/expense_reports');
+
+## ACTUALIZAR ATRIBUTOS CON 'UPDATE'
+Se debe de crear la vista con el nombre de 'edit.blade.php' para que funcione bien con los controladores.
+
+tambien se debe de tener en cuenta de que en Laravel cuando usamos recursos nos pone Put y Patch como una opción para modificar nuestros recursos. El problema de esto es que en un form no se puede especificar directamente que queremos hacer un Put o un Patch y por esto Laravel nos ofrece un mecanismo para hacer ”Fake PUT/PATCH” y podamos recibir y procesar los datos.
+
+Para que Laravel acepte el Put o Patch es necesario poner dentro del form de manera auxiliar - - @method(‘tipo de método usado’) 
+
+y así aunque el form tenga un POST como método, realmente será traducido al que especifiquemos dentro del auxiliar.
+
+Los controladores quedarian algo asi:
+
+````diff
+    public function edit($id)
+    {
+        $report = NOMBRE DEL MODELO::find($id);
+        return view('ruta de la vista', [
+            // aqui se agregan los parametros que se necesitan
+            'report' => $report
+        ]);
+    }
+````
+
+````diff
+    public function update(Request $request, $id)
+    {
+        $report = nombre del modelo::find($id);
+        $report->nombre del campo en la db = $request->get('nombre del input en el html');
+        $report->save();
+
+        return redirect('/ruta a donde se quiere ir despues de todo');
+    }
+````
+###### Consejos varios con 'UPDATE'
+Varios consejos:
+
+1-Una manera más eficaz de colocar la ruta de un form es: action="{{ route(‘expenseReport.update’, $Report) }}" . Así colocamos el nombre de la ruta y no la url, si actualizamos a futuro la dirección, no nos romperá al código.
+
+2- Colocar en los campos: value="{{ old(‘title’, $Report->title) }}", hace dos cosas: primero, cuando enviamos un parámetro y tenemos un error lo vuelve a colocar para no tener que escribirlo desde 0, y segundo cuando empezamos a editar en vez de tener el campo vacío nos pondrá el valor anterior, que editaremos
+
+_____________________________________________

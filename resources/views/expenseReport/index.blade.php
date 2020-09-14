@@ -20,9 +20,10 @@
                 <table class='table'>
                     @foreach($expenseReports as $expenseReport)
                         <tr>
-                            <td>
-                                {{$expenseReport->title}}
-                            </td>
+                            {{-- AQUI SE AGREGAN LAS COLUMAS QUE SE NECESITEN --}}
+                            <td>{{$expenseReport->title}}</td>
+                            {{-- INCORPORACION DE LA COLUMNA EDIT --}}
+                            <td><a href="/expense_reports/{{ $expenseReport->id }}/edit">Edit</a></td>
                         </tr>
                     @endforeach
                     </table>
