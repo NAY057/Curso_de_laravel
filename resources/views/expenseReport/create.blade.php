@@ -19,9 +19,11 @@
             <div class="col">
                 {{-- Creacion de formulario --}}
                 <form action="/expense_reports" method="POST" >
+                    {{-- se agrega la proteccion Cross-site request forgery  --}}
+                    @csrf
                     <div class="form-group">
                         <label for="title">Title:</label>
-                        <input type="text" class="form-control" id="titile" name="title" placeholder="Type new title">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Type new title">
                     </div>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>

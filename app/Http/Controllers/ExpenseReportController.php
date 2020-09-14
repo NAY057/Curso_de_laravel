@@ -29,6 +29,7 @@ class ExpenseReportController extends Controller
      */
     public function create()
     {
+        // siempre que se agrege alguna funcionalidad de crud, es nacesario tener los controladores y las vistas para que todo funcione bien.
         return view('expenseReport.create');
     }
 
@@ -40,7 +41,12 @@ class ExpenseReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $report = new ExpenseReport();
+        $report->title = $request->get('title');
+        $report->save();
+
+        // hace un retorno a la vista que se requiera
+        return redirect('/expense_reports');
     }
 
     /**

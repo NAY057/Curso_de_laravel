@@ -133,7 +133,7 @@ Luego se debe de poner lo siguente en 'function down()' para especificar que se 
 Para crear la columna title después de la columna ‘id’ y que esté mejor estruturado:
 - $table->text(‘title’)->after(‘id’);
 
-_________________________________________
+_____________________________________________
 
 ## BLADE LAYOUT
 Cuando se tienen muchas vistas que repiten gran parte del código HTML, una mejor práctica para evitar esta repetición es crear layouts y extender de ellos. De esta manera el layout tendrá el contenido que siempre se repite y los hijos el código específico de ellos.
@@ -141,3 +141,39 @@ Cuando se tienen muchas vistas que repiten gran parte del código HTML, una mejo
 @yield marca la parte (PADRE) en donde irá el código que los hijos extenderan  o hereden del layout.
 
 En las vistas (HIJAS) se utiliza @section para decir que esa parte del código es la que concuerda con el @yield del layout.
+
+## AGREGAR DATOS A LOS ATRIBUTOS
+Se utiliza la funcion store para guardar la informacion dentro de la base de datos, 
+
+````diff
+    +public function store(Request $request)
+    +{
+        $report = new NOMBRE DEL MODELO();
+        $report->NOMBRE DEL ATRIBUTO = $request->get('NOMBRE DEL ATRIBUTO ASIGNADO EN EL HTML');
+        $report->save();
+
+        return redirect('/expense_reports');
+    }
+````
+
+_____________________________________________
+
+
+## CSRF (Seguridad)
+
+CSRF (Cross-site request forgery) es un tipo de ataque que consiste en que un usuario puede intentar hacer muchas peticiones en nombre de otro. Para esto Laravel genera con cada sesión un token que se usará para validar que exista el usuario en el sistema y que sea él quien está haciendo la petición. Esto también implica que no se pueden hacer peticiones desde otra app hacia el post, debe manejarse de manera interna.
+
+Si queremos que un form pueda pasar la seguridad CSRF de Laravel, debemos agregar el helper @csrf el cual nos agrega un token.
+
+    Cuando estamos guardando nuevas entradas en la base de datos podemos redireccionar adonde queramos en nuestra aplicación con una respuesta especial de Laravel llamada redirect.
+
+Estamos trabajando con Middlewares los cuales son muy usados en aplicaciones web que consisten en capas que contienen el request. Cuando llega un request, éste deberá pasar por diferentes capas o filtros (middlewares) quienes al final regresarán una respuesta. Cada uno de los filtros puede detener las peticiones en caso de que algo no cumpla.
+
+Si no se desea usar la protección CSRF se puede directamente quitar el middleware desde el archivo kernel.php. De la misma manera se pueden crear middleware propios y agregarlos aquí.
+
+_____________________________________________
+
+
+## REDIRECT
+hace un retorno a la vista que se requiera
+- return redirect('/expense_reports');
