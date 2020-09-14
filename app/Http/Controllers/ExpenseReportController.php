@@ -16,6 +16,7 @@ class ExpenseReportController extends Controller
     public function index()
     {
         // con los puntos se acceden a carpetas
+        // los nombre de las vistas van entre comillas
         return view('expenseReport.index', [
             'expenseReports'=> ExpenseReport::all()
         ]);
@@ -28,7 +29,7 @@ class ExpenseReportController extends Controller
      */
     public function create()
     {
-        //
+        return view('expenseReport.create');
     }
 
     /**
