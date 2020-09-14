@@ -28,4 +28,7 @@ Route::get('/', 'App\Http\Controllers\HomeController@index');
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
 
 Route::resource('/expense_reports', 'App\Http\Controllers\ExpenseReportController');
+//Se crear una ruta manualmente de tipo get dado que se va a mostrar un formulario para poder eliminar registros del formulario.
+// En este caso particular si se le coloca una accion al final del controlador
+Route::get('/expense_reports/{id}/confirmDelete','App\Http\Controllers\ExpenseReportController@confirmDelete' );
 

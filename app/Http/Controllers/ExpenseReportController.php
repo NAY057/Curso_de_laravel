@@ -40,7 +40,7 @@ class ExpenseReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {  
         $report = new ExpenseReport();
         $report->title = $request->get('title');
         $report->save();
@@ -99,6 +99,18 @@ class ExpenseReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $report = ExpenseReport::find($id);
+        $report->delete();
+
+        return redirect('/expense_reports');
+    }
+
+    // Se crea un nuevo controlador
+    public function confirmDelete($id){
+        $report = ExpenseReport::find($id);
+        return view('expenseReport.confirmDelete', [
+            // aqui se agregan los parametros que se necesitan
+            'report' => $report
+        ]);
     }
 }

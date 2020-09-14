@@ -177,8 +177,9 @@ _____________________________________________
 ## REDIRECT
 hace un retorno a la vista que se requiera
 - return redirect('/expense_reports');
+_____________________________________________
 
-## ACTUALIZAR ATRIBUTOS CON 'UPDATE'
+## ACTUALIZAR REGISTROS CON 'UPDATE'
 Se debe de crear la vista con el nombre de 'edit.blade.php' para que funcione bien con los controladores.
 
 tambien se debe de tener en cuenta de que en Laravel cuando usamos recursos nos pone Put y Patch como una opción para modificar nuestros recursos. El problema de esto es que en un form no se puede especificar directamente que queremos hacer un Put o un Patch y por esto Laravel nos ofrece un mecanismo para hacer ”Fake PUT/PATCH” y podamos recibir y procesar los datos.
@@ -216,5 +217,33 @@ Varios consejos:
 1-Una manera más eficaz de colocar la ruta de un form es: action="{{ route(‘expenseReport.update’, $Report) }}" . Así colocamos el nombre de la ruta y no la url, si actualizamos a futuro la dirección, no nos romperá al código.
 
 2- Colocar en los campos: value="{{ old(‘title’, $Report->title) }}", hace dos cosas: primero, cuando enviamos un parámetro y tenemos un error lo vuelve a colocar para no tener que escribirlo desde 0, y segundo cuando empezamos a editar en vez de tener el campo vacío nos pondrá el valor anterior, que editaremos
+
+_____________________________________________
+
+## BORRAR REGISTROS (DELETE)
+Para el proceso de eliminacion se aplica algo parecido en la vista del index del controlador
+
+Diferente a este proceso, se crea una nueva sentencia de ruta, la cual se hara de manera siguiente:
+
+- Route::get(’/vista_principal/{id}/confirmDelete’,
+‘nomnre del controlador@confirmDelete’);
+
+Consecuentemente se crea un metodo “confirmDelete” en el controller designado, que va a contener lo siguiente:
+````
+$report = ExpenseReport::find($id);
+return view(‘nombreCarpeta.confirmDelete’, [
+‘report’ => $report
+]);
+````
+
+Finalmente, para la parte del metodo destroy(), se escribe algo similar a lo del update:
+````
+$report = ExpenseReport::find($id);
+
+$report->delete();
+
+return redirect(‘expense_reports’);
+````
+Para el caso de los edit, podemos usar en lugar de ‘find($id)’, ‘findOrFail($id)’ para validar que exista el usuario.
 
 _____________________________________________
