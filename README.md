@@ -63,6 +63,10 @@ PARA OBTENER AYUDA DEL COMANDO EN CUESTION
 
 CREA UN NUEVO ARCHIVO DE MIGRACION (despues de debe migrar a la db para que aparesca alla)
 - php artisan make:migration 'nombre descriptivo de la migracion' + '--create' + 'nombre de la tabla a crear' 
+
+CON 'REFRESH' SE BORRAN TODAS LA TABLAS JUNTO CON SU INFORMACION Y SE VUELVEN A CONTRUIR,
+ES COMO SI SE CORRIERA 'RESET' Y LUEGO 'MIGRATE' AL MISMO TIEMPO
+- php artisan migration:refresh
 _________________________________________
 
 ## CREAR CONTROLADORES
@@ -101,6 +105,9 @@ El comando tinker nos ofrece un entorno de pruebas para ver cómo funcionan las 
 
 - php artisan make:model + nombre del modelo (en singular) = crea una nueva clase para representar un modelo de Eloquent.
 
+- Asi se puede crear la tabla con su migracion y el modelo al mismo tiempo 
+    php artisan make:model -m NOMBRE DEL MODELO EN SINGULARs
+
 __________________________________________
 
 
@@ -120,7 +127,7 @@ paraguardar lo creado
 _____________________________________________
 
 
-## CREAR NUEVAS COLUMNAS
+## CREAR/BORRAR NUEVAS COLUMNAS
 Primero se realiza una nueva migracion para no generar confligtos, ademas se usa la siguiente expresion '--table' para MIGRAR SOLO LA TABLA EN CUESTION
 - php artisan make:migration 'nombre descriptivo de la migracion' --table 'nombre de la tabla'
 
@@ -132,6 +139,22 @@ Luego se debe de poner lo siguente en 'function down()' para especificar que se 
 
 Para crear la columna title después de la columna ‘id’ y que esté mejor estruturado:
 - $table->text(‘title’)->after(‘id’);
+
+Para borrar columnas se debe de crear una nueva migracion y en la 'function up' se agrega lo siguiente:
+
+###### ASI SE BORRAN COLUMNAS
+
+        Schema::table('nombre de la tabla', function (Blueprint $table) {
+            $table->dropColumn('nombre de la columna a borrar');
+        });
+
+si se quienen borrar varias columnas se puede hacer asi:
+
+        Schema::table('nombre de la tabla', function (Blueprint $table) {
+            $table->dropColumn([
+                'columna 1', 'columna 2' , ....
+            ]);
+        });
 
 _____________________________________________
 
@@ -279,4 +302,19 @@ Model Binding: se puede cambiar el parametro que se espera como ID de un Model p
             'report' => $expenseReport
         ]);
     }
+_____________________________________________
+
+## RELACIONES CON ELOQUENT
+
+1 a 1 —> $this->hasOne(‘App\Model’);
+1 a M —> $this->hasMany(‘App\Model’);
+M a 1 —> $this->belongsTo(‘App\Model’);
+M a M —> $this->belongsToMany(‘App\Model’);
+
+Es importante resaltar que si mi tabla tiene un código de id que rompe la convención las podemos resaltar de la siguiente forma
+$this->hasMany(‘App\Model’, ‘key_principal’, ‘key_referencia’);
+
+También pueden revisar la documentación
+https://laravel.com/docs/8.x/eloquent-relationships
+
 _____________________________________________
