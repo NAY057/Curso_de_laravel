@@ -21,8 +21,9 @@
                     @foreach($expenseReports as $expenseReport)
                         <tr>
                             {{-- AQUI SE AGREGAN LAS COLUMAS QUE SE NECESITEN --}}
-                            <td>{{$expenseReport->title}}</td>
+                            {{-- <td>{{$expenseReport->title}}</td> --}}
                             {{-- INCORPORACION DE LA COLUMNA EDIT --}}
+                            <td><a href="/expense_reports/{{ $expenseReport->id }}">{{$expenseReport->title}}</a></td>
                             <td><a href="/expense_reports/{{ $expenseReport->id }}/edit">Edit</a></td>
                             <td><a href="/expense_reports/{{ $expenseReport->id }}/confirmDelete">Delete</a></td>
                         </tr>

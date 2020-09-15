@@ -41,8 +41,15 @@ class ExpenseReportController extends Controller
      */
     public function store(Request $request)
     {  
+        // este seccion se encarga de la validacion de los campos
+        $validData = $request->validate([
+            // aqui se colocan todas las reglas que se requieran para validar
+            // para combinar validaciones se usa '|(altgr + 1)'
+            'title'=>'required|min:3'
+        ]);
+        // se usa la variable $validata antes del save dado que esta ya viene validada y filtrada
         $report = new ExpenseReport();
-        $report->title = $request->get('title');
+        $report->title = $validData['title'];
         $report->save();
 
         // hace un retorno a la vista que se requiera
@@ -55,9 +62,13 @@ class ExpenseReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    // ESTO ES MODEL BIDING
+    public function show(ExpenseReport $expenseReport)
     {
-        //
+        return view('expenseReport.show', [
+            // aqui se agregan los parametros que se necesitan
+            'report' => $expenseReport
+        ]);
     }
 
     /**
@@ -68,7 +79,7 @@ class ExpenseReportController extends Controller
      */
     public function edit($id)
     {
-        $report = ExpenseReport::find($id);
+        $report = ExpenseReport::findOrFail($id);
         return view('expenseReport.edit', [
             // aqui se agregan los parametros que se necesitan
             'report' => $report

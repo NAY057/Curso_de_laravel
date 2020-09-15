@@ -141,6 +141,7 @@ Cuando se tienen muchas vistas que repiten gran parte del código HTML, una mejo
 @yield marca la parte (PADRE) en donde irá el código que los hijos extenderan  o hereden del layout.
 
 En las vistas (HIJAS) se utiliza @section para decir que esa parte del código es la que concuerda con el @yield del layout.
+_____________________________________________
 
 ## AGREGAR DATOS A LOS ATRIBUTOS
 Se utiliza la funcion store para guardar la informacion dentro de la base de datos, 
@@ -246,4 +247,36 @@ return redirect(‘expense_reports’);
 ````
 Para el caso de los edit, podemos usar en lugar de ‘find($id)’, ‘findOrFail($id)’ para validar que exista el usuario.
 
+_____________________________________________
+
+## VALIDACION DE FORMULARIOS
+Es muy importante validar siempre la información que los usuarios ingresan en el sistema. En la mayoría de los casos tendrás usuarios bien intencionados que sólo busquen hacer uso del sistema, pero puede ocurrir que haya algún atacante que quiera obtener información que no le pertenece.
+
+Cuando por ejemplo se hace submit a un form vacío, no vamos a querer que el usuario final vea los errores como son lanzados sino manejarlos de alguna manera, así que los validamos con ayuda de Laravel.
+Laravel incluye todos los errores de validación que podamos encontrar dentro de un objeto especial llamado errors el cual podemos usar en nuestro template.
+
+    Se utiliza la línea vertical | para agregar más validaciones.
+    Si un usuario se equivoca al llenar los campos de formulario y al intentarlo de nuevo debe ingresarlos todos otra vez, eso significará una mala experiencia de usuario y creará frustración. Por esto mismo se deben poner de nuevo los valores y para esto Laravel nos ofrece un auxiliar especial llamado old que podemos usar en el valor del campo.
+
+## MODEL BINDING
+Model Binding: se puede cambiar el parametro que se espera como ID de un Model por el Model en concreto
+
+###### ANTES
+        public function show($id)
+    {
+        $report = ExpenseReport::findOrFail($id);
+        return view('expenseReport.edit', [
+            // aqui se agregan los parametros que se necesitan
+            'report' => $report
+        ]);
+    }
+
+###### AHORA
+        public function show(ExpenseReport $expenseReport)
+    {
+        return view('expenseReport.show', [
+            // aqui se agregan los parametros que se necesitan
+            'report' => $expenseReport
+        ]);
+    }
 _____________________________________________
