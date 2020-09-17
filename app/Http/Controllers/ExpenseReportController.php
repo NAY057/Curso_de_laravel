@@ -124,4 +124,17 @@ class ExpenseReportController extends Controller
             'report' => $report
         ]);
     }
+
+    public function confirmSendMail($id){
+        $report = ExpenseReport::find($id);
+        return view('expenseReport.confirmSendMail', [
+            // aqui se agregan los parametros que se necesitan
+            'report' => $report
+        ]);
+    }
+
+    public function sendMail($id){
+        $report = ExpenseReport::find($id);
+        return $report;
+    }
 }

@@ -78,6 +78,7 @@ Cuando utilizamos el comando “artisan”, encontramos una sección llamada “
 En nuestro archivo web.php, en la parte de los parámetros, en vez de poner un closure vamos a poner el nombre del controlador que creamos seguido de una @ y finalizando el método que llamaremos de ese controlador.
 
 -php artisan make:controller 'nombre del controlador'
+-php artisan make:controller -r 'nombre del controlador' (CONTROLADOR DE TIPO RESOURCE'CREAR, BORRAR, ACTUALIZA Y GUARDA')
 
 En la parte de rutas se debe especificar la ruta el controlados de la siguiente manera, amenos que el controlador no sea de tipo 'resource'
 - Route::get('/(ruta de navegacion)', 'App\Http\Controllers\(nombre del controlador)@(metodo)'); (SI NO ES DE TIPO RESOURCE)
