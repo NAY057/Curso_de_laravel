@@ -318,4 +318,25 @@ $this->hasMany(‘App\Model’, ‘key_principal’, ‘key_referencia’);
 También pueden revisar la documentación
 https://laravel.com/docs/8.x/eloquent-relationships
 
+## COMO HACER EL LOGIN
+Se deben escribir los comandos en consola, pero DENTRO de la carpeta del proyecto.
+
+Step 01:
+ - Install laravel 6.0
+ 
+Step 02:
+ - Download nodejs 
+ - Install nodejs in your pc
+ 
+Step 03:
+ - then open your project root and command
+ - composer require laravel/ui
+ - php artisan ui vue --auth
+ - npm install
+ - npm run dev
+
+PARA BLOQUEAR UN CONTROLADOR CON EL LOGIN SE DEBE DE CREAR EL SIGUIENTE CONSTRUCTOR DENTRO DE EL
+    public function __construct(){
+        $this->middleware('auth');
+    }
 _____________________________________________

@@ -36,3 +36,15 @@ Route::post('/expense_reports/{id}/sendMail','App\Http\Controllers\ExpenseReport
 Route::get('/expense_reports/{expense_report}/expenses/create','App\Http\Controllers\ExpenseController@create' );
 Route::post('/expense_reports/{expense_report}/expenses','App\Http\Controllers\ExpenseReportController@store' );
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
