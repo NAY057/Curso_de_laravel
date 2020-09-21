@@ -330,7 +330,7 @@ Step 02:
  
 Step 03:
  - then open your project root and command
- - composer require laravel/ui
+ - composer require laravel/ui --dev
  - php artisan ui vue --auth
  - npm install
  - npm run dev
